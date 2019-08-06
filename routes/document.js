@@ -20,6 +20,23 @@ router.get('/:taskId', async (req, res)=>{
     }
 });
 
+router.patch('/submit/:taskId', async (req, res)=>{
+    const author = await jwtVerify(req);
+    let document = await Document.findOne({
+        where: { author: author.id, task: req.params.taskId }
+    });
+    if(document) {
+        let result = await Document.update({
+            status: 'submit',
+        },{
+            where: { author: document.author, task:document.task}
+        });
+        if(result) res.status(200).send('Submit Success');
+    } else {
+        res.status(404).send('Not Found');
+    }
+});
+
 router.patch('/:taskId', async (req, res)=>{
     const author = await jwtVerify(req);
     let document = await Document.findOne({
