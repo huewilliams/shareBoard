@@ -5,6 +5,32 @@ const path = require('path');
 
 const router = express.Router();
 const Class = require('../models').Class;
+const Student = require('../models').Student;
+const { jwtVerify } = require('./middlewares');
+
+router.get('/:id', async (req, res)=> {
+    const student = await Student.findOne({
+        where: {id: req.params.id},
+    });
+    if(student) {
+        res.json(await student.getClasses());
+    }
+});
+
+router.post('/join/:className', async (req, res)=>{
+    const student = await jwtVerify(req);
+    const studentData = await Student.findOne({
+        where: {id: student.id}
+    });
+    const classData = await Class.findOne({
+        where: { name: req.params.className }
+    });
+    if(classData) {
+        studentData.setClasses(classData);
+        classData.setStudents(studentData);
+        res.status(200).send('join success');
+    }
+});
 
 router.post('/', async (req, res)=> {
     let data = await Class.create({
