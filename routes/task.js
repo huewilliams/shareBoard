@@ -16,6 +16,11 @@ router.get('/info/:taskId', async (req, res)=>{
     }
 });
 
+router.get('/download/:filename', (req, res)=>{
+    const file = `./uploads/${req.params.filename}`;
+    res.download(file);
+});
+
 router.get('/:className', async (req, res)=>{
     const task = await Task.findAll({
         where: { className: req.params.className },
