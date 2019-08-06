@@ -16,6 +16,16 @@ router.get('/info/:taskId', async (req, res)=>{
     }
 });
 
+router.get('/:className', async (req, res)=>{
+    const task = await Task.findAll({
+        where: { className: req.params.className },
+    });
+
+    if(task) {
+        res.json(task);
+    }
+});
+
 router.post('/', async (req, res)=>{
     const classExist = await Class.findOne({
         where: {name: req.body.className}
