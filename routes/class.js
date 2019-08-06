@@ -27,7 +27,6 @@ router.post('/join/:className', async (req, res)=>{
     });
     if(classData) {
         studentData.setClasses(classData);
-        classData.setStudents(studentData);
         res.status(200).send('join success');
     }
 });
