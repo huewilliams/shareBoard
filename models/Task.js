@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         taskStart: {
             type: DataTypes.DATE,
-            defaultValue: getDate(),
+            defaultValue: getDate(new Date()),
         },
         taskEndLine: {
             type: DataTypes.DATE,
