@@ -7,6 +7,7 @@ router.post('/', async (req, res)=> {
     let data = await Class.create({
         name: req.body.className,
         info: req.body.info,
+        img: req.body.img,
     });
     if(data) {
         res.json(data)
