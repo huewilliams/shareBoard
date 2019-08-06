@@ -16,6 +16,7 @@ router.post('/signIn', async (req, res)=>{
         res.json({
             token: token,
             type: type,
+            id: student.id,
         });
    }
 });
