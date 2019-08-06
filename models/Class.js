@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         img: {
             type: DataTypes.TEXT,
-            default: 'default.png',
+            defaultValue: 'default.png',
         }
     },{
         timestamps: false,
