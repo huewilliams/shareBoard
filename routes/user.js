@@ -7,8 +7,9 @@ const {jwtVerify} = require('./middlewares');
 
 router.get('/', async (req, res) => {
     const token = await jwtVerify(req);
+    console.log(token.type);
 
-    if(req.type === 'student') {
+    if(token.type === 'student') {
         const student = await Student.findOne({
             attributes: ['id', 'name', 'number'],
             where: {id: token.id},
