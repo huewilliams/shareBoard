@@ -7,8 +7,11 @@ const classRouter = require('./routes/class');
 const taskRouter = require('./routes/task');
 const authRouter = require('./routes/auth');
 const docsRouter = require('./routes/document');
+const userRouter = require('./routes/user');
 
 const app = express();
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
 sequelize.sync();
 
 app.set('port', 5000);
@@ -21,7 +24,12 @@ app.use('/class', classRouter);
 app.use('/task', taskRouter);
 app.use('/auth', authRouter);
 app.use('/docs', docsRouter);
+app.use('/user', userRouter);
 
-app.listen(app.get('port'), ()=> {
+server.listen(app.get('port'), ()=> {
     console.log(`server listening on ${app.get('port')}`)
 });
+
+// io.on('connection', (socket) => {
+//
+// });
