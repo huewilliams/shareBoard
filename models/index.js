@@ -17,6 +17,7 @@ db.Sequelize = Sequelize;
 
 db.Class = require('./Class')(sequelize, Sequelize);
 db.Task = require('./Task')(sequelize, Sequelize);
+db.Student = require('./Student')(sequelize, Sequelize);
 
 db.Class.hasMany(db.Task, { foreignKey: 'className', sourceKey: 'name'});
 db.Task.belongsTo(db.Class, { foreignKey: 'className', targetKey: 'name'});
