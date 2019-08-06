@@ -32,6 +32,12 @@ server.listen(app.get('port'), ()=> {
     console.log(`server listening on ${app.get('port')}`)
 });
 
-// io.on('connection', (socket) => {
-//
-// });
+io.on('connection', (socket) => {
+    socket.on('data', (data)=>{
+        console.log(data);
+    });
+
+    socket.on('disconnect', function() {
+        console.log('user disconnected: ' + socket.name);
+    });
+});
