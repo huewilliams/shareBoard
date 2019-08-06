@@ -3,8 +3,9 @@ const uuid = require('uuid/v4');
 module.exports = (sequelize, DataTypes) => {
     return sequelize.define('Task', {
         taskId: {
-            type: DataTypes.TEXT,
+            type: DataTypes.STRING(50),
             defaultValue: uuid(),
+            primaryKey: true,
         },
         taskName: {
             type: DataTypes.STRING(30),
