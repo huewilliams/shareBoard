@@ -4,6 +4,7 @@ require('dotenv').config({path: '.env'});
 
 const sequelize = require('./models').sequelize;
 const classRouter = require('./routes/class');
+const taskRouter = require('./routes/task');
 
 const app = express();
 sequelize.sync();
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false, limit: '50mb'}));
 
 app.use('/class', classRouter);
+app.use('/task', taskRouter);
 
 app.listen(app.get('port'), ()=> {
     console.log(`server listening on ${app.get('port')}`)
