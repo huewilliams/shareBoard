@@ -4,6 +4,16 @@ const router = express.Router();
 const Class = require('../models').Class;
 const Task = require('../models').Task;
 
+router.get('/id/:taskName', async (req, res)=>{
+   const task = await Task.findOne({
+       where: { taskName: req.params.taskName }
+   });
+
+    if(task) {
+        res.json({taskId : task.taskId})
+    }
+});
+
 router.get('/info/:taskId', async (req, res)=>{
     const task = await Task.findOne({
         where: {taskId: req.params.taskId}
